@@ -18,22 +18,3 @@ class Solution:
                 return i,my_map[complement]
         raise IndexError("No two sum solution")
         
-#7. Reverse Integer
-#70.73%
-class Solution(object):
-    def reverse(self, x):
-        """
-        :type x: int
-        :rtype: int
-        """
-        result=0
-        flag=1;
-        if x<0:
-            flag=-1
-            x=-x;
-        while x is not 0:
-            result = result*10 + x%10
-            x /= 10
-        if result > 2147483647 or result < -2147483648:
-            result=0
-        return result*flag
