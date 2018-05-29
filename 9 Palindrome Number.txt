@@ -15,3 +15,20 @@ class Solution(object):
             x /= 10;
         
         return x == revertedNumber or x == revertedNumber/10;#/10是剔除奇数个位时候产生的中间位数字
+        
+#9. Palindrome Number  
+#85%  但是用了整数转换字符串了，不符合要求
+class Solution(object):
+    def isPalindrome(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+        if x < 0:
+            return False
+        else:
+            str_x = str(x)
+        if str_x == str_x[::-1]:
+            return True
+        else:
+            return False
