@@ -1,0 +1,36 @@
+#13 Roman to Interger.txt
+#74%
+class Solution:
+    def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        map={}
+        map['I']=1
+        map['V']=5
+        map['X']=10
+        map['L']=50
+        map['C']=100
+        map['D']=500
+        map['M']=1000
+        sum=0
+        flag=0
+        for x in s:
+            sum=sum+map[x]   
+            if flag==1 and (x=='X' or x=='V'):
+                sum-=2;
+            elif flag==2 and (x=='L' or x=='C'):
+                sum-=20
+            elif flag==3 and (x=='D' or x=='M'):
+                sum-=200
+            if x=="I":
+                flag=1
+            elif x=='X':
+                flag=2
+            elif x=='C':
+                flag=3
+            else:
+                flag=0
+        return sum
+        
