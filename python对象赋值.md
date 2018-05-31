@@ -50,7 +50,7 @@ print ("id(ele): ",[id(ele) for ele in list2])
 
 [对象赋值](#Python 对象赋值)  
 [浅拷贝](#Python 浅拷贝)  
-[深拷贝](#Python 深拷贝)  
+[深拷贝](#Pythoon 深拷贝) 
 [全文总结](#全文总结)  
 
 ## Python 浅拷贝
