@@ -1,0 +1,38 @@
+#代码紧凑了，却时间效率不高，因为当l1或者l2有一个列表为空时候，没必要再放在同一个while继续判读是否为空了:wq
+def addTwoNumbers(l1, l2):
+    """
+    :type l1: ListNode
+    :type l2: ListNode
+    :rtype: ListNode
+    """
+    rlist = ListNode((l1.val+l2.val)%10)
+    currlist = rlist
+    currlist1 = l1
+    currlist2 = l2
+    carry = (l1.val+l2.val)//10
+    print(currlist.val,"->","carry:",carry)
+    while(currlist1.next!=None or currlist2.next!=None):
+        if currlist1.next!=None and currlist2.next==None:
+            currlist.next=ListNode((currlist1.next.val+carry)%10)
+            carry= (currlist1.next.val+carry)//10
+            currlist1=currlist1.next
+            
+        elif currlist2.next!=None and currlist1.next==None:
+            print("flag2")
+            currlist.next=ListNode((currlist2.next.val+carry)%10)
+            print(carry,"--")
+          
+            carry= (currlist2.next.val+carry)//10
+            print(carry)
+            currlist2=currlist2.next
+        
+        else:
+            currlist.next=ListNode((currlist2.next.val+currlist1.next.val+carry)%10)
+            carry = (currlist2.next.val+currlist1.next.val+carry)//10
+            currlist1=currlist1.next
+            currlist2=currlist2.next
+        currlist=currlist.next
+        print(currlist.val,"->","carry:",carry)
+    if carry==1:
+        currlist.next=ListNode(carry)
+    return rlist
