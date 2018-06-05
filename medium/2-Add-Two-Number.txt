@@ -22,9 +22,10 @@ class Solution:
             t = p
             p = p.next
             q = q.next
+        #当l1或者l2有一个已经遍历完了，没必要还在上面的while里面判读是空增加计算量
         while p:
             p.val = p.val + c
-            c = p.val //10
+            c = p.val //10，
             p.val = p.val%10
             t = p
             p = p.next
