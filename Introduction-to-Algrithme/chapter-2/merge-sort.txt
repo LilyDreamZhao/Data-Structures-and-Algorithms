@@ -1,0 +1,42 @@
+#分治法
+def merge(alist,p,q,r):#假设左右分别排序好
+    MAX = 2147483647
+    n1,n2 = q-p,r-q
+    R,L=[],[]
+    L[0:n1],R[0:n2] = alist[p:q],alist[q:r]
+    R.append(MAX)#设置哨兵，不用费事判断其中一半结束了
+    L.append(MAX)
+    i=j=0
+    for k in range(p,r):
+        if L[i]<R[j]:
+            i,alist[k]=i+1,L[i] 
+        else: 
+            j,alist[k]=j+1,R[j]
+			
+def merge(alist,p,q,r):#假设左右分别排序好
+    MAX = 2147483647
+    n1,n2 = q-p,r-q
+    L,R = alist[p:q],alist[q:r]#不用哨兵，则其中一半结束，把另外一半剩下的直接赋值过去即可
+    i=j=0
+    for k in range(p,r):
+        if i==n1:
+            alist[k:r]=R[j:]
+            break
+        elif j==n2:
+            alist[k:r]=L[i:]
+            break
+        if L[i]<R[j]:
+            i,alist[k]=i+1,L[i] 
+        else: 
+            j,alist[k]=j+1,R[j]
+			
+def merge_sort(alist,p,r):
+    if r-p>1:
+        q=(p+r)//2
+        merge_sort(alist,p,q)
+        merge_sort(alist,q,r)
+        merge(alist,p,q,r)
+    else:#算导这里没有，算导错了
+        alist[p],alist[r-1]=alist[r-1],alist[p]
+        
+#merge_sort(alist,0,len(alist))
