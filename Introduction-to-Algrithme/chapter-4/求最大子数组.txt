@@ -1,0 +1,36 @@
+def merger(alist,low,mid,high):#alist,p,q,r均为原来的下标。注意q还是特别指定好，不要另外再另外取p,r中间数，主要还是根据外函数保存一致保险的好
+    #已q起点分别向左右推最大数组 然后加起来即跨越中点的最大子数组
+    left_sum = -0xfffffffff#定义负无穷
+    tempsum = 0
+    for i in range(mid,low-1,-1):
+        tempsum += alist[i]
+        if tempsum>left_sum:
+            left_sum = tempsum
+            left_index = i
+    right_sum = -0xfffffffff#定义负无穷
+    tempsum = 0
+    for i in range(mid+1,high+1):
+        tempsum+=alist[i]
+        if tempsum>right_sum:
+            right_sum = tempsum
+            right_index = i
+        
+    return (left_sum+right_sum,left_index,right_index)
+
+def merger_sort(alist,low,high):
+    if low==high:
+        return alist[low],low,high
+    mid = (low+high)//2
+    left_sum,left_low,left_high = merger_sort(alist,low,mid)
+    right_sum,right_low,rigth_high = merger_sort(alist,mid+1,high)
+    cross_sum,cross_low,cross_high = merger(alist,low,mid,high)
+    if left_sum>=right_sum and left_sum>=cross_sum:
+        return left_sum,left_low,left_high
+    elif right_sum>=left_sum and right_sum>=cross_sum:
+         return right_sum,right_low,rigth_high 
+    else:
+        return cross_sum,cross_low,cross_high   
+    
+alist=[1,-20,50,-7,10,-4,-2,100,-40,-50,70,-11,-20]
+mysum,low,high=merger_sort(alist,0,len(alist)-1)
+print(low,high,mysum)#2 7 147
