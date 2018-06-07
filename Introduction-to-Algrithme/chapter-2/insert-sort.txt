@@ -1,10 +1,37 @@
-#插入排序
+#插入排序 降序
 def Insertion_sort(a):
     n=len(a)
-    for i in range(2,n):
+    for i in range(1,n):
         key=a[i]
         j=i-1
-        while j>0 and a[j]<=key:
+        while j>=0 and a[j]<key:
             a[j+1]=a[j]
             j=j-1
-        a[j]=key
+        a[j+1]=key
+#上述插入排序复杂度O(n^2)
+#注意到上while反向扫描已经排序好的子数组a[0:i-1],既然排序好，用二分法。复杂度降低到O(nlgn)
+def insert_dichotomy(alist,ele):#alist是排序好的,降序 
+    low,high=0,len(alist)-1
+    while True:
+        mid = (low+high)//2
+        if ele<alist[mid]:
+            low=mid
+        elif ele>alist[mid]:
+            high=mid
+        else:
+            break
+        if high-low<=1:#mid一定等于low,一定小于等于alist[mid]，注意：则还有判断和high的大小
+            if alist[high]<=alist[mid]:
+                mid=high
+            break
+    #end while 时候，low=mid=high还没判断ele与alist[mid]大小关系
+    alist.append(ele)#当原来只有一个元素时候，不用下面操作了
+    if len(alist)-1-mid:
+        alist[mid+2:]=alist[mid+1:-1]
+        alist[mid+1]=ele
+    
+    
+def insert_sort(alist):#降序排列
+    for i in range(1,len(alist)):
+        print(alist)
+        insert_dichotomy(alist[0:i],alist[i])     
